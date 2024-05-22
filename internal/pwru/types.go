@@ -55,6 +55,62 @@ type Flags struct {
 	Backend string
 }
 
+func (f *Flags) PrintValues() {
+	fmt.Printf(
+		`
+	KernelBTF %s
+
+	FilterNetns             %s
+	FilterMark              %d
+	FilterFunc              %s
+	FilterNonSkbFuncs       %v
+	FilterTrackSkb          %v
+	FilterTrackSkbByStackid %v
+	FilterTraceTc           %v
+	FilterIfname            %s
+	FilterPcap              %s
+	FilterKprobeBatch       %d
+
+	OutputTS         %s
+	OutputMeta       %v
+	OutputTuple      %v
+	OutputSkb        %v
+	OutputStack      %v
+	OutputLimitLines %ld
+	OutputFile       %s
+	OutputJson       %v
+
+	KMods    %v
+	AllKMods %v
+
+	ReadyFile %v
+
+	Backend %s\n`,
+		f.KernelBTF,
+		f.FilterNetns,
+		f.FilterMark,
+		f.FilterFunc,
+		f.FilterNonSkbFuncs,
+		f.FilterTrackSkb,
+		f.FilterTrackSkbByStackid,
+		f.FilterTraceTc,
+		f.FilterIfname,
+		f.FilterPcap,
+		f.FilterKprobeBatch,
+		f.OutputTS,
+		f.OutputMeta,
+		f.OutputTuple,
+		f.OutputSkb,
+		f.OutputStack,
+		f.OutputLimitLines,
+		f.OutputFile,
+		f.OutputJson,
+		f.KMods,
+		f.AllKMods,
+		f.ReadyFile,
+		f.Backend)
+}
+
 func (f *Flags) SetFlags() {
 	flag.BoolVarP(&f.ShowHelp, "help", "h", false, "display this message and exit")
 	flag.BoolVar(&f.ShowVersion, "version", false, "show pwru version and exit")

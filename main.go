@@ -39,6 +39,8 @@ func main() {
 		os.Exit(0)
 	}
 
+	flags.PrintValues()
+
 	if err := unix.Setrlimit(unix.RLIMIT_NOFILE, &unix.Rlimit{
 		Cur: 8192,
 		Max: 8192,
@@ -112,7 +114,7 @@ func main() {
 	var bpfSpec *ebpf.CollectionSpec
 	switch {
 	case (flags.OutputSkb || flags.OutputShinfo) && useKprobeMulti:
-		bpfSpec, err = LoadKProbeMultiPWRU()
+		bpfSpec, err = LoadKProbeMultiPWRU() // These `Load*` functions are generated when building.
 	case flags.OutputSkb || flags.OutputShinfo:
 		bpfSpec, err = LoadKProbePWRU()
 	case useKprobeMulti:
