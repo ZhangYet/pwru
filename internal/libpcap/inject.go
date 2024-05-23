@@ -31,7 +31,7 @@ func injectFilter(program *ebpf.ProgramSpec, filterExpr string, l3 bool) (err er
 	if l3 {
 		suffix = "_l3"
 	}
-	fmt.Printf("Name: %s\nInsts:\n%s\n", program.Name, program.Instructions.String())
+	fmt.Printf("BEFORE INJECTIONG\nName: %s\nInsts:\n%s\n", program.Name, program.Instructions.String())
 	injectIdx := -1
 	for idx, inst := range program.Instructions {
 		if inst.Symbol() == "filter_pcap_ebpf"+suffix {
@@ -73,6 +73,6 @@ func injectFilter(program *ebpf.ProgramSpec, filterExpr string, l3 bool) (err er
 	program.Instructions = append(program.Instructions[:injectIdx],
 		append(filterEbpf, program.Instructions[injectIdx:]...)...,
 	)
-
+	fmt.Printf("AFTER INJECTIONG\nName: %s\nInsts:\n%s\n", program.Name, program.Instructions.String())
 	return nil
 }
