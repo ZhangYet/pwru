@@ -31,9 +31,7 @@ func injectFilter(program *ebpf.ProgramSpec, filterExpr string, l3 bool) (err er
 	if l3 {
 		suffix = "_l3"
 	}
-	for _, inst := range program.Instructions {
-		fmt.Printf("Symbol: %s, %d, %d, %d\n", inst.Symbol(), inst.OpCode, inst.Src, inst.Dst)
-	}
+	fmt.Printf("Name: %s\nInsts:\n%s\n", program.Name, program.Instructions.String())
 	injectIdx := -1
 	for idx, inst := range program.Instructions {
 		if inst.Symbol() == "filter_pcap_ebpf"+suffix {
