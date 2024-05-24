@@ -85,7 +85,8 @@ func (f *Flags) PrintValues() {
 
 	ReadyFile %v
 
-	Backend %s\n`,
+	Backend %s
+`,
 		f.KernelBTF,
 		f.FilterNetns,
 		f.FilterMark,

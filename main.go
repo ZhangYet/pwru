@@ -99,10 +99,7 @@ func main() {
 	if len(funcs) <= 0 {
 		log.Fatalf("Cannot find a matching kernel function")
 	}
-	fmt.Println("funcs")
-	for _, fn := range funcs {
-		fmt.Printf("\t%v\n", fn)
-	}
+
 	// If --filter-trace-tc, it's to retrieve and print bpf prog's name.
 	addr2name, name2addr, err := pwru.ParseKallsyms(funcs, flags.OutputStack ||
 		len(flags.KMods) != 0 || flags.FilterTraceTc || len(flags.FilterNonSkbFuncs) > 0)
